@@ -123,15 +123,6 @@ echo ""
 echo "📝 Creating project instructions..."
 bash "$SCRIPT_DIR/create-claude-md.sh"
 
-# Verify installation
-echo ""
-echo "🔍 Verifying installation..."
-python3 "$SCRIPT_DIR/verify-install.py"
-
+# Setup is complete - install.sh will handle verification and final output
 echo ""
 echo "✨ Setup complete!"
-echo ""
-echo "🚀 Quick Start:"
-echo "   1. Activate environment: source $PROJECT_ROOT/venv/bin/activate"
-echo "   2. Start Claude Code: claude code"
-echo "   3. Use command: /slide-create 'Your presentation topic'"

@@ -9,10 +9,12 @@ The Slide Agent comes with pre-configured permissions to ensure a seamless exper
 The following tools are automatically approved when you install Slide Agent:
 
 ### Web Operations
+
 - **WebSearch** - Search the web for research content
 - **WebFetch** - Fetch and analyze web pages
 
 ### File Operations
+
 - **Read** - Read any file in the project
 - **Write** - Create new files
 - **Edit** - Modify existing files
@@ -22,17 +24,20 @@ The following tools are automatically approved when you install Slide Agent:
 - **Grep** - Search file contents
 
 ### Development Tools
+
 - **Python execution** - Run Python scripts
 - **Node.js execution** - Run JavaScript/Node scripts
 - **Package managers** - pip, npm operations
 - **Git operations** - status, diff, log
 
 ### Presentation Tools
+
 - **PowerPoint MCP Server** - All PowerPoint operations
 - **Task management** - TodoWrite for tracking tasks
 - **Notebook editing** - For Jupyter notebooks
 
 ### MCP Servers
+
 All MCP server tools are pre-approved with the pattern `mcp__*`:
 - `mcp__powerpoint__*` - PowerPoint operations
 - `mcp__office__*` - Office suite operations
@@ -43,12 +48,14 @@ All MCP server tools are pre-approved with the pattern `mcp__*`:
 ## Security Considerations
 
 ### What's Approved
+
 - Safe file operations (read, write, edit)
 - Controlled bash commands (Python, Node, package managers)
 - Research tools (web search, fetch)
 - Presentation-specific operations
 
 ### What's NOT Approved
+
 - System-level commands (sudo, rm -rf, etc.)
 - Sensitive file access outside project
 - Database operations
@@ -82,12 +89,14 @@ To modify permissions, edit the `autoApprovedTools` section in:
 ## Troubleshooting
 
 ### Permission Denied
+
 If you encounter permission prompts:
 1. Check if the tool is in the approved list
 2. Add it to `autoApprovedTools` if safe
 3. Restart Claude Code
 
 ### MCP Server Access
+
 MCP servers should auto-connect with:
 ```json
 {
@@ -122,4 +131,4 @@ For permission-related issues:
 1. Check `~/.config/claude-code/settings.json`
 2. Verify MCP server configuration
 3. Review Claude Code logs
-4. Report issues at: https://github.com/schlessera/ppt-slide-agent/issues
+4. Report issues at: <https://github.com/schlessera/ppt-slide-agent/issues>

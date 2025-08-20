@@ -48,40 +48,32 @@ fi
 echo "🚀 Running setup..."
 bash scripts/setup.sh
 
-# Run verification
-echo ""
-echo "🔍 Verifying installation..."
+# Run verification quietly
 source "$INSTALL_DIR/venv/bin/activate" 2>/dev/null && python "$INSTALL_DIR/scripts/verify-install.py" --quiet 2>/dev/null
 VERIFY_RESULT=$?
 
+# Display clean summary
 echo ""
-echo "======================================================="
+echo "═══════════════════════════════════════════════════════════════"
 if [ $VERIFY_RESULT -eq 0 ]; then
-    echo "✅ Installation COMPLETE and VERIFIED!"
+    echo "✅ Slide Agent Installation Complete!"
 else
-    echo "⚠️  Installation completed with warnings"
-    echo "   Run verification manually: cd $INSTALL_DIR && source venv/bin/activate && python scripts/verify-install.py"
+    echo "⚠️  Slide Agent Installation Complete (with warnings)"
 fi
-echo "======================================================="
+echo "═══════════════════════════════════════════════════════════════"
 echo ""
-echo "📍 Installation Location: $INSTALL_DIR"
+echo "📍 Installed at: $INSTALL_DIR"
 echo ""
-echo "🚀 Quick Start:"
-echo "   1. Navigate to project:  cd $INSTALL_DIR"
-echo "   2. Start Claude Code:    claude code"
-echo "   3. Create presentation:  Type: /slide-create 'Your Topic'"
+echo "🚀 Get Started (just 2 steps):"
+echo "   1. cd $INSTALL_DIR"
+echo "   2. claude code"
 echo ""
-echo "📚 Available Commands:"
-echo "   /slide-create [topic]    - Create new presentation"
-echo "   /slide-research [topic]  - Research content"
-echo "   /slide-optimize         - Optimize design"
-echo "   /slide-export [format]  - Export (pptx, pdf, images)"
+echo "💡 First command to try:"
+echo "   /slide-create \"My First Presentation\""
 echo ""
-echo "🔧 Optional: Add API keys to $INSTALL_DIR/.env"
-echo "   - OPENAI_API_KEY       (for GPT-based features)"
-echo "   - ANTHROPIC_API_KEY    (for Claude API)"
-echo "   - TAVILY_API_KEY       (for web research)"
-echo "   - GITHUB_TOKEN         (for template access)"
-echo ""
-echo "📖 Documentation: $INSTALL_DIR/README.md"
-echo "🐛 Issues: https://github.com/schlessera/ppt-slide-agent/issues"
+if [ $VERIFY_RESULT -ne 0 ]; then
+    echo "⚠️  To check warnings: cd $INSTALL_DIR && python scripts/verify-install.py"
+    echo ""
+fi
+echo "📖 Learn more: README.md | 🐛 Issues: GitHub.com/schlessera/ppt-slide-agent"
+echo "═══════════════════════════════════════════════════════════════"
