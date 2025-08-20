@@ -28,25 +28,26 @@ def print_status(component, status, details=""):
 
 def check_python_packages():
     """Check required Python packages are installed"""
-    required_packages = [
-        'python-pptx',
-        'mcp',
-        'pydantic',
-        'httpx',
-        'pillow',
-        'matplotlib',
-        'pandas'
-    ]
+    # Map of display name to actual import name
+    required_packages = {
+        'python-pptx': 'pptx',
+        'mcp': 'mcp',
+        'pydantic': 'pydantic',
+        'httpx': 'httpx',
+        'pillow': 'PIL',
+        'matplotlib': 'matplotlib',
+        'pandas': 'pandas'
+    }
     
     print(f"\n{Colors.BLUE}Checking Python packages...{Colors.ENDC}")
     all_ok = True
     
-    for package in required_packages:
+    for display_name, import_name in required_packages.items():
         try:
-            __import__(package.replace('-', '_'))
-            print_status(package, True)
+            __import__(import_name)
+            print_status(display_name, True)
         except ImportError:
-            print_status(package, False)
+            print_status(display_name, False)
             all_ok = False
     
     return all_ok
@@ -188,9 +189,19 @@ def check_environment():
 
 def main():
     """Main verification function"""
-    print(f"{Colors.BLUE}{'='*50}{Colors.ENDC}")
-    print(f"{Colors.BLUE}Slide Agent Installation Verification{Colors.ENDC}")
-    print(f"{Colors.BLUE}{'='*50}{Colors.ENDC}")
+    # Check for quiet mode
+    quiet = '--quiet' in sys.argv or '-q' in sys.argv
+    
+    if not quiet:
+        print(f"{Colors.BLUE}{'='*50}{Colors.ENDC}")
+        print(f"{Colors.BLUE}Slide Agent Installation Verification{Colors.ENDC}")
+        print(f"{Colors.BLUE}{'='*50}{Colors.ENDC}")
+    
+    # Redirect output in quiet mode
+    import io
+    old_stdout = sys.stdout
+    if quiet:
+        sys.stdout = io.StringIO()
     
     checks = [
         ("Python Packages", check_python_packages),
@@ -210,31 +221,38 @@ def main():
             results[name] = check_func()
             all_passed = all_passed and results[name]
         except Exception as e:
-            print(f"{Colors.RED}Error checking {name}: {e}{Colors.ENDC}")
+            if not quiet:
+                sys.stdout = old_stdout
+                print(f"{Colors.RED}Error checking {name}: {e}{Colors.ENDC}")
+                sys.stdout = io.StringIO() if quiet else old_stdout
             results[name] = False
             all_passed = False
     
-    # Summary
-    print(f"\n{Colors.BLUE}{'='*50}{Colors.ENDC}")
-    print(f"{Colors.BLUE}Verification Summary{Colors.ENDC}")
-    print(f"{Colors.BLUE}{'='*50}{Colors.ENDC}")
+    # Restore stdout
+    sys.stdout = old_stdout
     
-    for name, passed in results.items():
-        status = f"{Colors.GREEN}PASSED{Colors.ENDC}" if passed else f"{Colors.RED}FAILED{Colors.ENDC}"
-        print(f"  {name}: {status}")
+    if not quiet:
+        # Summary
+        print(f"\n{Colors.BLUE}{'='*50}{Colors.ENDC}")
+        print(f"{Colors.BLUE}Verification Summary{Colors.ENDC}")
+        print(f"{Colors.BLUE}{'='*50}{Colors.ENDC}")
+        
+        for name, passed in results.items():
+            status = f"{Colors.GREEN}PASSED{Colors.ENDC}" if passed else f"{Colors.RED}FAILED{Colors.ENDC}"
+            print(f"  {name}: {status}")
+        
+        print(f"\n{Colors.BLUE}Overall Status:{Colors.ENDC}", end=" ")
+        if all_passed:
+            print(f"{Colors.GREEN}✓ All checks passed!{Colors.ENDC}")
+            print(f"\n{Colors.GREEN}Slide Agent is ready to use!{Colors.ENDC}")
+            print(f"\nNext steps:")
+            print(f"  1. Start Claude Code: {Colors.YELLOW}claude code{Colors.ENDC}")
+            print(f"  2. Create a presentation: {Colors.YELLOW}/slide-create 'Your Topic'{Colors.ENDC}")
+        else:
+            print(f"{Colors.RED}✗ Some checks failed{Colors.ENDC}")
+            print(f"\n{Colors.YELLOW}Please run the setup script again or check the errors above.{Colors.ENDC}")
     
-    print(f"\n{Colors.BLUE}Overall Status:{Colors.ENDC}", end=" ")
-    if all_passed:
-        print(f"{Colors.GREEN}✓ All checks passed!{Colors.ENDC}")
-        print(f"\n{Colors.GREEN}Slide Agent is ready to use!{Colors.ENDC}")
-        print(f"\nNext steps:")
-        print(f"  1. Start Claude Code: {Colors.YELLOW}claude code{Colors.ENDC}")
-        print(f"  2. Create a presentation: {Colors.YELLOW}/slide-create 'Your Topic'{Colors.ENDC}")
-        return 0
-    else:
-        print(f"{Colors.RED}✗ Some checks failed{Colors.ENDC}")
-        print(f"\n{Colors.YELLOW}Please run the setup script again or check the errors above.{Colors.ENDC}")
-        return 1
+    return 0 if all_passed else 1
 
 if __name__ == "__main__":
     sys.exit(main())
