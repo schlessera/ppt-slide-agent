@@ -1,0 +1,121 @@
+{
+  "autoApprovedTools": [
+    "WebSearch",
+    "WebSearch(*)",
+    "WebFetch",
+    "WebFetch(*)",
+    "Read",
+    "Read(*)",
+    "Write",
+    "Write(*)",
+    "Edit",
+    "Edit(*)",
+    "MultiEdit",
+    "MultiEdit(*)",
+    "Grep",
+    "Grep(*)",
+    "Glob",
+    "Glob(*)",
+    "LS",
+    "LS(*)",
+    "Bash(python *)",
+    "Bash(python3 *)",
+    "Bash(pip *)",
+    "Bash(npm *)",
+    "Bash(libreoffice *)",
+    "Bash(ls *)",
+    "Bash(cd *)",
+    "Bash(pwd)",
+    "Bash(mkdir *)",
+    "Bash(cp presentations/*)",
+    "Bash(mv presentations/*)",
+    "Bash(rm presentations/*.pptx)",
+    "Bash(rm presentations/*.pdf)",
+    "Bash(rm presentations/*.png)",
+    "TodoWrite",
+    "TodoWrite(*)",
+    "Task",
+    "Task(*)",
+    "NotebookEdit",
+    "NotebookEdit(*)",
+    "ExitPlanMode",
+    "ExitPlanMode(*)",
+    "BashOutput",
+    "BashOutput(*)",
+    "KillBash",
+    "KillBash(*)",
+    "mcp__pptx__*",
+    "mcp__*"
+  ],
+  "permissions": {
+    "allowedDirectories": [
+      "${CLAUDE_PROJECT_DIR}",
+      "${CLAUDE_PROJECT_DIR}/presentations",
+      "${CLAUDE_PROJECT_DIR}/server",
+      "${CLAUDE_PROJECT_DIR}/.claude"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "mcp__pptx__download_presentation",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ${CLAUDE_PROJECT_DIR}/server/tools/slide_exporter.py"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date)] User: $1\" >> ${CLAUDE_PROJECT_DIR}/presentations/.activity.log"
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "PYTHONPATH": "${CLAUDE_PROJECT_DIR}/server:${PYTHONPATH}",
+    "PRESENTATIONS_DIR": "${CLAUDE_PROJECT_DIR}/presentations",
+    "TEMPLATES_DIR": "${CLAUDE_PROJECT_DIR}/presentations/templates",
+    "EXPORTS_DIR": "${CLAUDE_PROJECT_DIR}/presentations/exports"
+  },
+  "features": {
+    "extendedThinking": true,
+    "imageSupport": true,
+    "webAccess": true,
+    "taskManagement": true,
+    "mcpIntegration": true
+  },
+  "ui": {
+    "showToolUse": true,
+    "showThinking": false,
+    "compactMode": false
+  },
+  "slideAgent": {
+    "defaultTemplate": "professional",
+    "autoSave": true,
+    "autoSaveInterval": 300,
+    "outputDirectory": "${CLAUDE_PROJECT_DIR}/presentations",
+    "enableVersioning": true,
+    "exportFormats": ["pptx", "pdf", "png", "markdown"],
+    "defaultTheme": {
+      "primaryColor": "#2C3E50",
+      "secondaryColor": "#3498DB",
+      "accentColor": "#E74C3C",
+      "backgroundColor": "#FFFFFF",
+      "fontFamily": "Arial, sans-serif"
+    },
+    "qualitySettings": {
+      "imageResolution": "1920x1080",
+      "pdfQuality": "high",
+      "fontMinSize": 24,
+      "contrastRatio": 4.5
+    }
+  }
+}

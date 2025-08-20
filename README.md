@@ -1,18 +1,15 @@
-# 🎯 PPT Slide Agent - AI-Powered PowerPoint Creator
+# 🎯 PPT Slide Agent for Claude Code
 
-**One-line setup for an intelligent PowerPoint presentation system powered by Claude Code and MCP servers.**
-
-🔗 **Repository:** [github.com/schlessera/ppt-slide-agent](https://github.com/schlessera/ppt-slide-agent)
+A powerful PowerPoint presentation creation system built specifically for Claude Code, featuring MCP integration, intelligent agents, and automated export capabilities.
 
 ## ✨ Features
 
-- 🤖 **AI-Driven Creation** - Natural language to professional presentations
-- 🔌 **MCP Integration** - Direct PowerPoint manipulation via Model Context Protocol
-- 🎨 **Smart Design** - Automatic layout optimization and theme application
-- 🔍 **Content Research** - Built-in web research for accurate, relevant content
-- 📊 **Data Visualization** - Automatic chart and graph generation
-- 🎯 **Custom Agents** - Specialized agents for creation, research, and design
-- 🚀 **One-Line Install** - Get started in seconds
+- **🤖 AI-Powered Creation**: Create professional presentations using natural language
+- **🔬 Intelligent Research**: Automatic topic research and content gathering
+- **🎨 Design Optimization**: Smart design improvements and visual enhancements
+- **📤 Multi-Format Export**: Export to PPTX, PDF, PNG, and Markdown with images
+- **🗣️ Speaker Notes**: Automatic generation of comprehensive speaker notes
+- **🖼️ Visual Documentation**: Generate markdown overviews with slide images
 
 ## 🚀 Quick Start
 
@@ -22,191 +19,158 @@
 curl -fsSL https://raw.githubusercontent.com/schlessera/ppt-slide-agent/main/install.sh | bash
 ```
 
-Or clone and setup:
+### Manual Installation
 
 ```bash
 git clone https://github.com/schlessera/ppt-slide-agent.git
 cd ppt-slide-agent
-bash scripts/setup.sh
+./install.sh
 ```
 
-### First Presentation
+## 📚 Usage
 
+### Start Claude Code
 ```bash
-# Start Claude Code
+cd ~/ppt-slide-agent
 claude code
-
-# Create your first presentation
-/slide-create "Introduction to Quantum Computing"
 ```
 
-## 📋 Prerequisites
+### Available Commands
 
-- **OS**: Ubuntu, WSL, or Linux
-- **Claude Code**: CLI installed (`npm install -g @anthropic/claude-code`)
-- **Python**: 3.8+ 
-- **Node.js**: 16+
-
-The installer will check and install missing dependencies automatically.
-
-## 🎮 Usage
-
-### Basic Commands
-
-| Command | Description |
-|---------|-------------|
-| `/slide-create [topic]` | Create a new presentation |
-| `/slide-research [topic]` | Research content for slides |
-| `/slide-optimize` | Optimize design and layout |
-| `/slide-export [format]` | Export to PDF, images, etc. |
-| `/slide-theme [name]` | Apply presentation theme |
-
-### Example Workflows
-
-#### 1. Quick Business Presentation
-```bash
-/slide-create "Q4 2024 Sales Report"
-# AI researches data, creates slides, applies corporate theme
-```
-
-#### 2. Academic Presentation with Research
-```bash
-/slide-research "Climate Change Impact on Ocean Acidification"
-/slide-create --use-research
-/slide-optimize
-```
-
-#### 3. Custom Theme Application
-```bash
-/slide-create "Product Launch 2025"
-/slide-theme corporate-blue
-/slide-add "Market Analysis" --data market-data.csv
-```
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/slide-create` | Create a new presentation | `/slide-create "AI in Healthcare"` |
+| `/slide-research` | Research a topic | `/slide-research "Quantum Computing"` |
+| `/slide-optimize` | Optimize presentation design | `/slide-optimize presentation.pptx` |
+| `/slide-export` | Export to multiple formats | `/slide-export latest` |
 
 ## 🏗️ Architecture
 
+### Claude Code Structure
 ```
-slide-agent/
-├── agents/              # Custom AI agents
-│   ├── slide-creator.json
-│   ├── content-researcher.json
-│   └── design-optimizer.json
-├── config/              # Configuration files
-│   └── mcp-config.json
-├── hooks/               # Event hooks
-│   ├── before-slide-create.sh
-│   └── after-slide-create.sh
-├── mcp-servers/         # MCP server implementations
-│   └── powerpoint-mcp/
-├── templates/           # Presentation templates
-│   ├── professional/
-│   ├── academic/
-│   └── creative/
-├── scripts/             # Setup and utility scripts
-└── presentations/       # Output directory
+.claude/
+├── settings.json       # Project settings and permissions
+├── commands/          # Custom slash commands
+│   ├── slide-create.md
+│   ├── slide-research.md
+│   ├── slide-optimize.md
+│   └── slide-export.md
+└── agents/           # Specialized sub-agents
+    ├── slide-creator.md
+    ├── content-researcher.md
+    └── design-optimizer.md
 ```
 
-## ⚙️ Configuration
+### MCP Integration
+- **Server**: FastMCP-based pptx-mcp server
+- **Tools**: 11+ PowerPoint manipulation tools
+- **Auto-Export**: Hooks for automatic markdown generation
 
-### Environment Variables
+## 🛠️ Configuration
 
-1. **Copy the sample environment file:**
+### Environment Variables (.env)
 ```bash
-cp .env.sample .env
+# MCP Server
+PPTX_HOST=127.0.0.1
+PPTX_PORT=8000
+
+# Optional API Keys
+OPENAI_API_KEY=        # For GPT features
+ANTHROPIC_API_KEY=     # For Claude API
+TAVILY_API_KEY=        # For web search
+GITHUB_TOKEN=          # For templates
 ```
 
-2. **Edit `.env` and add your API keys (all optional):**
-```bash
-# API Keys for enhanced features (all optional)
-ANTHROPIC_API_KEY=    # For Claude API access
-OPENAI_API_KEY=       # For additional AI features
-TAVILY_API_KEY=       # For web search capabilities
-GITHUB_TOKEN=         # For accessing template repositories
+### MCP Configuration (.mcp.json)
+The MCP server is configured to run locally with automatic startup when Claude Code launches.
 
-# PowerPoint Settings (defaults work fine)
-PPT_DEFAULT_THEME=professional_blue
-PPT_AUTO_SAVE=true
-PPT_AUTO_BACKUP=true
+## 📦 Components
 
-# Slide Agent Settings
-SLIDE_AGENT_AUTO_RESEARCH=true
-SLIDE_AGENT_AUTO_DESIGN=true
+### Sub-Agents
+- **slide-creator**: Main presentation creation agent
+- **content-researcher**: Research and information gathering
+- **design-optimizer**: Visual design and layout optimization
+
+### Export Features
+- **PPTX**: Native PowerPoint format
+- **PDF**: Universal document format
+- **PNG**: Individual slide images
+- **Markdown**: Documentation with embedded images
+
+## 🔧 Prerequisites
+
+- **Python 3.8+**: Required for MCP server
+- **Node.js 18+**: Required for Claude Code
+- **Claude Code CLI**: Installed automatically if missing
+- **LibreOffice**: Optional, for image generation
+
+## 📖 Documentation
+
+### Creating Presentations
 ```
-
-**Note:** All API keys are optional. The system works without them but some features may be limited.
-
-### Custom Agents
-
-Modify agent behavior in `agents/` directory:
-- `slide-creator.json` - Presentation creation logic
-- `content-researcher.json` - Research capabilities
-- `design-optimizer.json` - Design improvements
-
-## 🔧 Advanced Features
-
-### Custom Hooks
-
-Add automation with hooks:
-
-```bash
-# hooks/before-slide-create.sh
-#!/bin/bash
-echo "Creating presentation: $1"
-# Custom logic here
+/slide-create "Your Topic"
 ```
+The agent will:
+1. Research the topic
+2. Create an outline
+3. Generate slides with content
+4. Apply professional design
+5. Add speaker notes
+6. Export with documentation
 
-### Template Creation
-
-Add custom templates in `templates/` directory following the structure:
+### Exporting Presentations
 ```
-templates/custom-theme/
-├── theme.json
-├── layouts/
-├── styles/
-└── assets/
+/slide-export latest
 ```
-
-### MCP Server Extensions
-
-Extend capabilities by adding MCP servers in `config/mcp-config.json`.
-
-## 🐳 Docker Support
-
-Run in an isolated environment:
-
-```bash
-docker-compose up
-docker exec -it slide-agent claude code
-```
-
-## 📚 Documentation
-
-- [Installation Guide](docs/installation.md)
-- [Custom Agents](docs/agents.md)
-- [MCP Server Setup](docs/mcp-setup.md)
-- [Template Creation](docs/templates.md)
-- [API Reference](docs/api.md)
+Generates:
+- PPTX file
+- PDF version
+- PNG images of each slide
+- Markdown overview with images
 
 ## 🤝 Contributing
 
-Contributions welcome! Please read our [Contributing Guide](CONTRIBUTING.md).
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-MIT License - See [LICENSE](LICENSE) file.
+MIT License - see LICENSE file for details
 
-## 🆘 Support
+## 🐛 Troubleshooting
 
-- **Issues**: [GitHub Issues](https://github.com/schlessera/ppt-slide-agent/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/schlessera/ppt-slide-agent/discussions)
-- **Documentation**: [Wiki](https://github.com/schlessera/ppt-slide-agent/wiki)
+### Common Issues
 
-## 🌟 Acknowledgments
+**LibreOffice not found**
+```bash
+# Ubuntu/Debian
+sudo apt install libreoffice
 
-- [Claude Code](https://claude.ai/code) - AI coding assistant
-- [Model Context Protocol](https://modelcontextprotocol.io) - MCP specification
-- [python-pptx](https://python-pptx.readthedocs.io) - PowerPoint manipulation
+# macOS
+brew install libreoffice
+```
+
+**MCP Server not starting**
+- Check `.mcp.json` configuration
+- Verify Python environment
+- Check port availability (8000)
+
+**Permission errors**
+- Review `.claude/settings.json`
+- Check file permissions
+- Ensure proper directory access
+
+## 🔗 Links
+
+- [Claude Code Documentation](https://docs.anthropic.com/claude-code)
+- [MCP Protocol](https://modelcontextprotocol.io)
+- [Issue Tracker](https://github.com/schlessera/ppt-slide-agent/issues)
+
+## 🙏 Acknowledgments
+
+- Based on [pptx-mcp](https://github.com/samos123/pptx-mcp) by samos123
+- Built for [Claude Code](https://www.anthropic.com/claude-code) by Anthropic
+- Uses [python-pptx](https://python-pptx.readthedocs.io/) for PowerPoint manipulation
 
 ---
 
-**Built with ❤️ for presenters who value their time**
+**Made with ❤️ for Claude Code users**

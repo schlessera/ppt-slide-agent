@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "pptx": {
+      "command": "python",
+      "args": [
+        "${CLAUDE_PROJECT_DIR}/server/server.py"
+      ],
+      "env": {
+        "HOST": "${PPTX_HOST:-127.0.0.1}",
+        "PORT": "${PPTX_PORT:-8000}",
+        "PRESENTATIONS_DIR": "${CLAUDE_PROJECT_DIR}/presentations",
+        "PYTHONPATH": "${CLAUDE_PROJECT_DIR}/server:${PYTHONPATH}"
+      },
+      "schema": {
+        "description": "PowerPoint presentation creation and manipulation server",
+        "tools": [
+          "create_presentation",
+          "add_slide",
+          "add_text_to_slide",
+          "add_image_to_slide",
+          "add_speaker_notes",
+          "get_slide_content",
+          "download_presentation",
+          "render_slide_to_image",
+          "list_presentations",
+          "get_presentation_info",
+          "clear_presentation"
+        ]
+      }
+    }
+  }
+}

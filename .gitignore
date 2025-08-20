@@ -62,5 +62,10 @@ temp/
 *.tmp
 
 # Claude configuration (user-specific)
-.claude/
-claude-config/
+!.claude/
+.claude/data/sessions/
+.claude/settings.local.json
+.claude/.cache/
+
+# MCP configuration (contains credentials)
+.mcp.json
