@@ -1,0 +1,114 @@
+{
+  "autoApprovedTools": [
+    "WebSearch",
+    "WebSearch(*)",
+    "WebFetch",
+    "WebFetch(*)",
+    "Read",
+    "Read(*)",
+    "Write",
+    "Write(*)",
+    "Edit",
+    "Edit(*)",
+    "MultiEdit",
+    "MultiEdit(*)",
+    "Grep",
+    "Grep(*)",
+    "Glob",
+    "Glob(*)",
+    "LS",
+    "LS(*)",
+    "Bash(python *)",
+    "Bash(python3 *)",
+    "Bash(pip *)",
+    "Bash(npm *)",
+    "Bash(node *)",
+    "Bash(ls *)",
+    "Bash(cd *)",
+    "Bash(pwd)",
+    "Bash(cat *)",
+    "Bash(echo *)",
+    "Bash(mkdir *)",
+    "Bash(cp *)",
+    "Bash(mv *)",
+    "Bash(rm *.pptx)",
+    "Bash(rm *.pdf)",
+    "Bash(rm *.png)",
+    "Bash(rm *.jpg)",
+    "Bash(source *)",
+    "Bash(which *)",
+    "Bash(export *)",
+    "Bash(git status)",
+    "Bash(git diff)",
+    "Bash(git log *)",
+    "TodoWrite",
+    "TodoWrite(*)",
+    "Task",
+    "Task(*)",
+    "NotebookEdit",
+    "NotebookEdit(*)",
+    "ExitPlanMode",
+    "ExitPlanMode(*)",
+    "BashOutput",
+    "BashOutput(*)",
+    "KillBash",
+    "KillBash(*)",
+    "mcp__*",
+    "mcp__powerpoint__*",
+    "mcp__office__*",
+    "mcp__ide__*",
+    "mcp__filesystem__*",
+    "mcp__github__*",
+    "mcp__web__*"
+  ],
+  "mcpServers": {
+    "powerpoint": {
+      "command": "python",
+      "args": ["-m", "office_powerpoint_mcp_server"],
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/mcp-servers/powerpoint-mcp"
+      },
+      "autoStart": true,
+      "autoApprove": true
+    }
+  },
+  "defaultTools": {
+    "search": "Grep",
+    "fileSearch": "Glob",
+    "webSearch": "WebSearch",
+    "read": "Read",
+    "write": "Write"
+  },
+  "hooks": {
+    "enabled": true,
+    "directory": "${workspaceFolder}/hooks"
+  },
+  "memory": {
+    "enabled": true,
+    "claudeMdPath": "${workspaceFolder}/CLAUDE.md"
+  },
+  "features": {
+    "extendedThinking": true,
+    "imageSupport": true,
+    "webAccess": true,
+    "taskManagement": true,
+    "mcpIntegration": true
+  },
+  "ui": {
+    "showToolUse": true,
+    "showThinking": false,
+    "compactMode": false
+  },
+  "slideAgent": {
+    "defaultTemplate": "professional",
+    "autoSave": true,
+    "autoSaveInterval": 300,
+    "outputDirectory": "${workspaceFolder}/presentations",
+    "enableVersioning": true,
+    "defaultTheme": {
+      "primaryColor": "#2C3E50",
+      "secondaryColor": "#3498DB",
+      "fontFamily": "Arial, sans-serif"
+    }
+  }
+}
