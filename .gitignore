@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Presentations output
+presentations/*.pptx
+presentations/*.pdf
+presentations/recovery/
+presentations/.creation_log
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+*.cache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# MCP
+mcp-servers/powerpoint-mcp/
+*.mcp.log
+
+# Backups
+*.backup
+*.backup.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Claude configuration (user-specific)
+.claude/
+claude-config/
