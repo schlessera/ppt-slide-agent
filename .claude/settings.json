@@ -45,6 +45,7 @@
     "KillBash",
     "KillBash(*)",
     "mcp__pptx__*",
+    "mcp__mermaid__*",
     "mcp__*"
   ],
   "permissions": {
@@ -62,7 +63,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python ${CLAUDE_PROJECT_DIR}/server/tools/slide_exporter.py"
+            "command": "python ${CLAUDE_PROJECT_DIR}/server/tools/slide_exporter.py ${PRESENTATION_PATH}",
+            "description": "Export to markdown with PNG images"
+          },
+          {
+            "type": "command",
+            "command": "python ${CLAUDE_PROJECT_DIR}/server/tools/screenshot_extractor.py ${PRESENTATION_PATH}",
+            "description": "Extract screenshots for review"
+          },
+          {
+            "type": "command",
+            "command": "python ${CLAUDE_PROJECT_DIR}/server/tools/quality_scorer.py ${PRESENTATION_PATH}",
+            "description": "Generate quality report"
           }
         ]
       }
@@ -104,18 +116,70 @@
     "outputDirectory": "${CLAUDE_PROJECT_DIR}/presentations",
     "enableVersioning": true,
     "exportFormats": ["pptx", "pdf", "png", "markdown"],
-    "defaultTheme": {
-      "primaryColor": "#2C3E50",
-      "secondaryColor": "#3498DB",
-      "accentColor": "#E74C3C",
-      "backgroundColor": "#FFFFFF",
-      "fontFamily": "Arial, sans-serif"
+    "workflow": {
+      "phases": ["research", "outline", "layout", "design", "build", "review"],
+      "parallelExecution": true,
+      "autoOptimize": true,
+      "targetQualityScore": 85,
+      "maxIterations": 5
+    },
+    "contentRules": {
+      "maxWordsPerSlide": 40,
+      "minFontSize": 24,
+      "requireVisualElement": true,
+      "requireSpeakerNotes": true
+    },
+    "designSystem": {
+      "colorSchemes": {
+        "default": {
+          "primary": "#2563EB",
+          "accent": "#F59E0B",
+          "text": "#1F2937",
+          "background": "#FFFFFF"
+        },
+        "corporate": {
+          "primary": "#1E40AF",
+          "accent": "#059669",
+          "text": "#1F2937",
+          "background": "#FFFFFF"
+        },
+        "creative": {
+          "primary": "#DC2626",
+          "accent": "#7C3AED",
+          "text": "#1F2937",
+          "background": "#FFFFFF"
+        }
+      },
+      "typography": {
+        "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "scaleRatio": 1.333,
+        "baseFontSize": 24
+      }
+    },
+    "imageSettings": {
+      "preferredSources": ["unsplash", "pexels", "pixabay"],
+      "requireAttribution": false,
+      "minResolution": [1920, 1080],
+      "maxFileSizeKB": 500,
+      "optimizeOnImport": true
+    },
+    "mermaidSettings": {
+      "theme": "base",
+      "applyDesignSystem": true,
+      "maxComplexity": 9,
+      "preferredTypes": ["flowchart", "mindmap", "sequence", "quadrant"]
     },
     "qualitySettings": {
-      "imageResolution": "1920x1080",
-      "pdfQuality": "high",
-      "fontMinSize": 24,
-      "contrastRatio": 4.5
+      "thresholds": {
+        "designConsistency": 85,
+        "contentQuality": 85,
+        "visualImpact": 80,
+        "accessibility": 90,
+        "technicalQuality": 85,
+        "engagementPotential": 75
+      },
+      "autoReview": true,
+      "iterativeImprovement": true
     }
   }
 }

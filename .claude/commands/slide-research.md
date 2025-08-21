@@ -86,3 +86,57 @@ Suggested structure with:
 - Currency: Information is up-to-date
 - Completeness: Covers all essential aspects
 - Objectivity: Balanced perspectives included
+
+## 🎯 Next Steps
+
+### Recommended Next Action:
+**Command**: `/slide-outline`
+- **Purpose**: Transform your research into a structured presentation flow
+- **Why Now**: You have gathered comprehensive information that needs organization
+- **Expected Time**: 5-10 minutes
+
+### Alternative Next Steps:
+
+1. **Need Deeper Research?**
+   ```
+   /slide-research "[specific subtopic]"
+   ```
+   - Use when: You identified gaps in your research
+   - Focus on: Specific areas that need more detail
+
+2. **Ready to Create Design System?**
+   ```
+   /slide-design
+   ```
+   - Use when: You have brand guidelines ready
+   - Skip to: Visual design planning
+
+3. **Want to Start Building?**
+   ```
+   /slide-create "[topic]"
+   ```
+   - Use when: Time is critical
+   - Note: Uses research to build immediately
+
+### Workflow Progress:
+```
+✅ Research (COMPLETE)
+→  Outline (NEXT)
+   Layout
+   Design
+   Build
+   Review
+```
+
+### Before Proceeding, Verify:
+- [ ] Have sufficient data for 10-15 slides
+- [ ] Identified key statistics and facts
+- [ ] Found relevant examples/case studies
+- [ ] Discovered visual opportunities
+- [ ] Understood target audience needs
+
+### 💡 Pro Tips:
+- Save your research document for reference
+- Note any sensitive topics to handle carefully
+- Identify your strongest supporting evidence
+- Consider which findings will resonate most with your audience

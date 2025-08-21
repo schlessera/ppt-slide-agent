@@ -58,3 +58,58 @@ Provide:
 3. Presentation file location
 4. Tips for effective delivery
 5. Markdown documentation with PNG exports
+
+## 🎯 Next Steps
+
+### Recommended Next Action:
+**Command**: `/slide-review`
+- **Purpose**: Assess quality and optimize presentation
+- **Why Now**: Initial creation complete, needs refinement
+- **Expected Time**: 10-15 minutes
+
+### Alternative Next Steps:
+
+1. **Quick Preview?**
+   ```
+   /slide-export
+   ```
+   - Use when: Need immediate preview
+   - Formats: PDF, PNG, Markdown
+
+2. **Manual Adjustments?**
+   ```
+   Edit specific slides directly
+   ```
+   - Use when: Minor tweaks needed
+   - Tools: mcp__pptx__ tools
+
+3. **Add Custom Elements?**
+   ```
+   /slide-diagram "[concept]"
+   ```
+   - Use when: Need specialized visuals
+   - Types: flowchart, mindmap, timeline
+
+### Quick Creation Workflow:
+```
+✅ Create (COMPLETE)
+→  Review (RECOMMENDED)
+   OR
+→  Export (Quick sharing)
+   OR  
+→  Manual Edit (Specific changes)
+```
+
+### Before Sharing:
+- [ ] Review all slides for accuracy
+- [ ] Check speaker notes completeness
+- [ ] Verify visual consistency
+- [ ] Test on target display
+- [ ] Create backup copy
+
+### 💡 Pro Tips:
+- Always review before important presentations
+- Export to PDF for reliable sharing
+- Test animations and transitions
+- Practice with speaker notes
+- Consider audience feedback for improvements
